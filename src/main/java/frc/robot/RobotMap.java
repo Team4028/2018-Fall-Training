@@ -19,7 +19,9 @@ public class RobotMap
   // Talon Motor Controllers
   // =============================
   public static final int CHASSIS_LEFT_DRIVE_MASTER_TALON_CAN_BUS_ID = 5;
+  public static final int CHASSIS_LEFT_DRIVE_SLAVE_TALON_CAN_BUS_ID = 9;
   public static final int CHASSIS_RIGHT_DRIVE_MASTER_TALON_CAN_BUS_ID = 6;
+  public static final int CHASSIS_RIGHT_DRIVE_SLAVE_TALON_CAN_BUS_ID = 10;
 
   // =============================
   // Servos
@@ -48,4 +50,5 @@ public class RobotMap
   // =============================
   public static final String VISION_SOCKET_SERVER_IPV4_ADDR = "10.40.28.xxx";
   public static final int VISION_SOCKET_SERVER_PORT = 1234;
+
 }
