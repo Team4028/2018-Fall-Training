@@ -28,21 +28,26 @@ public class Chassis
 
     public void setMotorSpeed (double leftSpeed, double rightSpeed)
     {
+        //set the speed for the right chassis motor
         _rightMotor.set(ControlMode.PercentOutput, rightSpeed);
+        //set the speed for the left chassis motor
         _leftMotor.set(ControlMode.PercentOutput, leftSpeed);
     }
 
     public void setServoPosition(double servoPosition) 
     {
+        //set the position of the shooter slider
         _linearServo.set(servoPosition);
     }
     public void setHighGear()
     {
+        //set the gearbox to high gear
         _shifter.set(Chassis.SHIFTER_HIGH_GEAR_POS);
 
     }
     public void setLowGear()
     {
+        //set the gearbox to low gear
         _shifter.set(Chassis.SHIFTER_LOW_GEAR_POS);
     }
 }
