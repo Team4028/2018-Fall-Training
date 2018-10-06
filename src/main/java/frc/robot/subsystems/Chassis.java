@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.RobotMap;
 
-public class Chassis 
+public class Chassis
 {
     private TalonSRX _leftMotor;
     private TalonSRX _rightMotor;
