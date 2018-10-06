@@ -9,7 +9,7 @@ public class Climber
 
     public Climber () 
     {
-        _rotaryServo = new Servo(RobotMap.ROTARYSERVO_SERVO_PWMPORT);
+        _rotaryServo = new Servo(9);
     }
     public void setPosition(double position) 
     {
