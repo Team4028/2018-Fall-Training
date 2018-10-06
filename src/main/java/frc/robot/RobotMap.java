@@ -13,14 +13,39 @@ package frc.robot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
+public class RobotMap 
+{
+  // =============================
+  // Talon Motor Controllers
+  // =============================
+  public static final int CHASSIS_LEFT_DRIVE_MASTER_TALON_CAN_BUS_ID = 5;
+  public static final int CHASSIS_RIGHT_DRIVE_MASTER_TALON_CAN_BUS_ID = 6;
 
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
+  // =============================
+  // Servos
+  // =============================
+  public static final int SHOOTER_SLIDER_LINEAR_SERVO_PWM_PORT = 9;
+
+  // =============================
+  // Solenoids
+  // =============================
+  public static final int CHASSIS_GEARBOX_SHIFTER_HIGH_GEAR_PCM_PORT = 1;
+  public static final int CHASSIS_GEARBOX_SHIFTER_LOW_GEAR_PCM_PORT = 2;
+
+  // =============================
+  // Digital I/O
+  // =============================
+  public static final int CUBE_IN_POSITION_LIMIT_SWITCH_DIO_PORT = 0;
+
+  // =============================
+  // Driver/Operator Station
+  // =============================
+  public static final int DRIVERS_STATION_DRIVER_GAMEPAD_USB_PORT = 0;
+  public static final int DRIVERS_STATION_OPERATOR_GAMEPAD_USB_PORT = 1;
+
+  // =============================
+  // Onboard Vision Subsystem 
+  // =============================
+  public static final String VISION_SOCKET_SERVER_IPV4_ADDR = "10.40.28.xxx";
+  public static final int VISION_SOCKET_SERVER_PORT = 1234;
 }
