@@ -77,7 +77,7 @@ public class OI {
     return _driverJoystick.getRawButton(4);
   }
 
-  public boolean rotaryServo() {
+  public boolean getServoCommand() {
     return _operatorJoystick.getRawButton(1);
   }
 }
