@@ -45,7 +45,34 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
+  Joystick _driverJoystick;
 
+  public OI() {
+    _driverJoystick = new Joystick(0);
+  }
 
+  public double getLeftMotorCommand() {
+    return _driverJoystick.getRawAxis(1);
+  }
+
+  public double getRightMotorCommand() {
+    return _driverJoystick.getRawAxis(5);
+  }
+
+  public boolean getExtendServoCommand() {
+    return _driverJoystick.getRawButton(1);
+  }
+
+  public boolean getRetractServoCommand() {
+    return _driverJoystick.getRawButton(2);
+  }
+
+  public boolean getHighGearCommand() {
+    return _driverJoystick.getRawButton(3);
+  }
+
+  public boolean getLowGearCommand() {
+    return _driverJoystick.getRawButton(4);
+  }
 }
 
