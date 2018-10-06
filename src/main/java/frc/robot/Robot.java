@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Chassis;
+import frc.robot.subsystems.Elevator;
 
 public class Robot extends TimedRobot 
 {
@@ -22,6 +23,7 @@ public class Robot extends TimedRobot
   public static ExampleSubsystem _exampleSubsystem = new ExampleSubsystem();
   public static OI _oi;
   private Chassis _chassis;
+  private Elevator _elevator;
 
   Command _autonCommand;
   SendableChooser<Command> _autonChooser = new SendableChooser<>();
@@ -38,6 +40,8 @@ public class Robot extends TimedRobot
     SmartDashboard.putData("Auto mode", _autonChooser);
     _chassis = new Chassis();
     _oi = new OI();
+    _elevator = new Elevator();
+
   }
 
   // ==============================================================================================
@@ -111,6 +115,12 @@ public class Robot extends TimedRobot
     else if (_oi.getLowGearCommand())
     {
      _chassis.setLowGear();
+    }
+
+    //climber
+    if (_oi.getServoCommand())
+    {
+      _elevator.setPosition(.5);
     }
   }
 
