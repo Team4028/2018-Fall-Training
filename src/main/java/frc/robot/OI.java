@@ -46,9 +46,11 @@ public class OI {
   // button.whenReleased(new ExampleCommand());
 
   Joystick _driverJoystick;
+  Joystick _operatorJoystick;
 
   public OI() {
     _driverJoystick = new Joystick(0);
+    _operatorJoystick = new Joystick(1);
   }
 
   public double getLeftMotorCommand() {
@@ -73,6 +75,10 @@ public class OI {
 
   public boolean getLowGearCommand() {
     return _driverJoystick.getRawButton(4);
+  }
+
+  public boolean rotaryServo() {
+    return _operatorJoystick.getRawButton(1);
   }
 }
 
