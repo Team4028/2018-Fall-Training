@@ -14,12 +14,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Chassis;
 
 public class Robot extends TimedRobot 
 {
   // global working variables
   public static ExampleSubsystem _exampleSubsystem = new ExampleSubsystem();
   public static OI _oi;
+  private Chassis _chassis;
 
   Command _autonCommand;
   SendableChooser<Command> _autonChooser = new SendableChooser<>();
@@ -34,6 +36,8 @@ public class Robot extends TimedRobot
     _autonChooser.addDefault("Default Auto", new ExampleCommand());
     // _autonChooser.addObject("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", _autonChooser);
+    _chassis = new Chassis();
+    _oi = new OI();
   }
 
   // ==============================================================================================
@@ -73,6 +77,8 @@ public class Robot extends TimedRobot
     {
       _autonCommand.cancel();
     }
+    _chassis.setServoPosition(1);
+    _chassis.setHighGear();
   }
 
   /**
@@ -82,6 +88,30 @@ public class Robot extends TimedRobot
   public void teleopPeriodic() 
   {
     Scheduler.getInstance().run();
+    double leftSpeed = _oi.getLeftMotorCommand();
+    double rightSpeed = _oi.getRightMotorCommand();
+    
+    _chassis.setMotorSpeed(leftSpeed, rightSpeed);
+
+    //Servo
+    if (_oi.getExtendServoCommand()) 
+    {
+        _chassis.setServoPosition(1);
+    }
+   else if (_oi.getRetractServoCommand()) 
+    {
+        _chassis.setServoPosition(.2);
+    }
+
+    //Gear shift
+    if (_oi.getHighGearCommand())
+    {
+      _chassis.setHighGear();
+    }
+    else if (_oi.getLowGearCommand())
+    {
+     _chassis.setLowGear();
+    }
   }
 
   // ==============================================================================================
