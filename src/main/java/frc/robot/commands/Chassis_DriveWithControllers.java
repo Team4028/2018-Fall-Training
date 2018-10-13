@@ -8,21 +8,37 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subsystems.Chassis;
+import frc.robot.util.BeakXboxController.Thumbstick;
 
-public class DriveChassis extends Command {
-  public DriveChassis() {
+public class Chassis_DriveWithControllers extends Command
+  {
+    Chassis _chassis = Chassis.getInstance();
+    private Thumbstick _leftThumbstick;
+    private Thumbstick _rightThumbstick;
+
+  public Chassis_DriveWithControllers(Thumbstick leftThumbstick, Thumbstick rightThumbstick)
+  {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+   requires(_chassis);
+   setInterruptible(true);
+   _leftThumbstick = leftThumbstick;
+   _rightThumbstick = rightThumbstick;
+
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  protected void execute() 
+  {
+    _chassis.setMotorSpeed(_leftThumbstick.getY(), _rightThumbstick.getX());
   }
 
   // Make this return true when this Command no longer needs to run execute()

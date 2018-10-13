@@ -7,8 +7,12 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
+import frc.robot.commands.Chassis_DriveWithControllers;
+import frc.robot.commands.Chassis_GearShift;
+import frc.robot.commands.Elevator_ToggleServo;
+import frc.robot.commands.Infeed_InfeedBall;
+import frc.robot.commands.Infeed_SpinArmBrush;
+import frc.robot.util.BeakXboxController;
 
 
 
@@ -45,40 +49,51 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  Joystick _driverJoystick;
-  Joystick _operatorJoystick;
+  BeakXboxController _driverGamepad;
+  BeakXboxController _operatorGamepad;
 
-  public OI() {
-    _driverJoystick = new Joystick(0);
-    _operatorJoystick = new Joystick(1);
+  public OI() 
+  {
+    _driverGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_DRIVER_GAMEPAD_USB_PORT);
+    _driverGamepad.leftStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.rightStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.leftStick.whenReleased(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.rightStick.whenReleased(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.a.whenPressed(new Elevator_ToggleServo());
+    _driverGamepad.b.whenPressed(new Chassis_GearShift());
+    _driverGamepad.lt.whileActive(new Infeed_InfeedBall(rightTrigger))
+
+    _operatorGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_OPERATOR_GAMEPAD_USB_PORT);
+    _operatorGamepad.lt.whileActive(new Infeed_SpinArmBrush(_operatorGamepad.lt));
   }
 
+/*
   public double getLeftMotorCommand() {
-    return _driverJoystick.getRawAxis(1);
+    return _driverGamepad.getRawAxis(1);
   }
 
   public double getRightMotorCommand() {
-    return _driverJoystick.getRawAxis(5);
+    return _driverGamepad.getRawAxis(5);
   }
 
   public boolean getExtendServoCommand() {
-    return _driverJoystick.getRawButton(1);
+    return _driverGamepad.getRawButton(1);
   }
 
   public boolean getRetractServoCommand() {
-    return _driverJoystick.getRawButton(2);
+    return _driverGamepad.getRawButton(2);
   }
 
   public boolean getHighGearCommand() {
-    return _driverJoystick.getRawButton(3);
+    return _driverGamepad.getRawButton(3);
   }
 
   public boolean getLowGearCommand() {
-    return _driverJoystick.getRawButton(4);
+    return _driverGamepad.getRawButton(4);
   }
 
   public boolean getServoCommand() {
-    return _operatorJoystick.getRawButton(1);
-  }
+    return _operatorGamepad.getRawButton(1);
+  }*/
 }
 

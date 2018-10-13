@@ -1,53 +1,88 @@
 package frc.robot.subsystems;
-
+//#region
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+//#endregion
 
-public class Chassis
+/**Defines the chassis subsystem, which controls:
+ * Left and Right Motors
+ * High and Low gear
+ */
+
+public class Chassis extends Subsystem
 {
-    private TalonSRX _leftMotor;
-    private TalonSRX _rightMotor;
-    private Servo _linearServo;
+    private TalonSRX _leftMasterMotor;
+    private TalonSRX _rightMasterMotor;
+    private TalonSRX _rightSlaveMotor;
+    private TalonSRX _rightSlaveMotorTwo;
+    private TalonSRX _leftSlaveMotor;
+    private TalonSRX _leftSlaveMotorTwo;
     private DoubleSolenoid _shifter;   
     private static final Value SHIFTER_LOW_GEAR_POS = DoubleSolenoid.Value.kReverse;
     private static final Value SHIFTER_HIGH_GEAR_POS = DoubleSolenoid.Value.kForward;
 
-
-    public Chassis()
+//defines singleton region
+    private static Chassis _instance = new Chassis();
+    public static Chassis getInstance()
     {
-        _leftMotor = new TalonSRX(RobotMap.CHASSIS_LEFT_DRIVE_MASTER_TALON_CAN_BUS_ID);
-        _rightMotor = new TalonSRX(RobotMap.CHASSIS_RIGHT_DRIVE_MASTER_TALON_CAN_BUS_ID);
-        _linearServo = new Servo(RobotMap.SHOOTER_SLIDER_LINEAR_SERVO_PWM_PORT);
+        return _instance;
+    }
+
+    private Chassis()
+    {
+        _leftMasterMotor = new TalonSRX(RobotMap.CHASSIS_LEFT_DRIVE_MASTER_TALON_CAN_BUS_ID);
+        _leftSlaveMotor = new TalonSRX(RobotMap.CHASSIS_LEFT_DRIVE_SLAVE_TALON_CAN_BUS_ID);
+        _leftSlaveMotorTwo = new TalonSRX(RobotMap.CHASSIS_LEFT_DRIVE_SLAVE_TWO_TALON_CAN_BUS_ID);
+        _leftSlaveMotor.follow(_leftMasterMotor);
+        _leftSlaveMotorTwo.follow(_leftMasterMotor);
+
+        _rightMasterMotor = new TalonSRX(RobotMap.CHASSIS_RIGHT_DRIVE_MASTER_TALON_CAN_BUS_ID);
+        _rightSlaveMotor = new TalonSRX(RobotMap.CHASSIS_RIGHT_DRIVE_SLAVE_TALON_CAN_BUS_ID);
+        _rightSlaveMotor.follow(_rightMasterMotor);
+        _rightSlaveMotorTwo = new TalonSRX(RobotMap.CHASSIS_RIGHT_DRIVE_SLAVE_TWO_TALON_CAN_BUS_ID);
+        _rightSlaveMotorTwo.follow(_rightMasterMotor);
+        
         _shifter = new DoubleSolenoid(RobotMap.CHASSIS_GEARBOX_SHIFTER_HIGH_GEAR_PCM_PORT, RobotMap.CHASSIS_GEARBOX_SHIFTER_LOW_GEAR_PCM_PORT);
     }
 
-    public void setMotorSpeed (double leftSpeed, double rightSpeed)
+    //controls left and right motor speeds
+    public void setMotorSpeed (double driveSpeed, double turnSpeed)
     {
-        //set the speed for the right chassis motor
-        _rightMotor.set(ControlMode.PercentOutput, rightSpeed);
-        //set the speed for the left chassis motor
-        _leftMotor.set(ControlMode.PercentOutput, leftSpeed);
-    }
+        double leftSpeed = (.4 * -driveSpeed) + (.5 * -turnSpeed);
+        double rightSpeed = (.4 * driveSpeed) + (.5 * -turnSpeed);
+        //set the speed for the right chassis motors
+        _rightMasterMotor.set(ControlMode.PercentOutput, rightSpeed);
+        
 
-    public void setServoPosition(double servoPosition) 
-    {
-        //set the position of the shooter slider
-        _linearServo.set(servoPosition);
-    }
-    public void setHighGear()
-    {
-        //set the gearbox to high gear
-        _shifter.set(Chassis.SHIFTER_HIGH_GEAR_POS);
+
+        //set the speed for the left chassis motors
+        _leftMasterMotor.set(ControlMode.PercentOutput, leftSpeed);
 
     }
-    public void setLowGear()
+    public void toggleGearShift()
     {
-        //set the gearbox to low gear
-        _shifter.set(Chassis.SHIFTER_LOW_GEAR_POS);
+        //toggle the gear shift
+        Value currentGear = _shifter.get();
+        if(currentGear == SHIFTER_HIGH_GEAR_POS)
+        {
+            _shifter.set(SHIFTER_LOW_GEAR_POS);
+        }
+        else
+        {
+            _shifter.set(SHIFTER_HIGH_GEAR_POS);
+        }
+
+    }
+
+    @Override
+    public void initDefaultCommand() 
+    {
+      // Set the default command for a subsystem here.
+      // setDefaultCommand(new MySpecialCommand());
     }
 }
