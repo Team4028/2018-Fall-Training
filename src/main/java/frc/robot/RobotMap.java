@@ -33,8 +33,8 @@ public class RobotMap
   //==============================
   //Victor Motor Controllers
   //==============================
-  public static final int INFEED_MOTOR_RIGHT_PCM_PORT = 7;
-  public static final int INFEED_MOTOR_LEFT_PCM_PORT = 8;
+  public static final int INFEED_MOTOR_RIGHT_PWM_PORT = 7;
+  public static final int INFEED_MOTOR_LEFT_PWM_PORT = 8;
   public static final int INFEED_ARM_BRUSH_MOTOR_VICTOR_PCM_PORT = 6;
 
 

@@ -10,7 +10,7 @@ package frc.robot;
 import frc.robot.commands.Chassis_DriveWithControllers;
 import frc.robot.commands.Chassis_GearShift;
 import frc.robot.commands.Elevator_ToggleServo;
-import frc.robot.commands.Infeed_InfeedBall;
+import frc.robot.commands.Infeed_DriveInfeedWheelsWithControllers;
 import frc.robot.commands.Infeed_SpinArmBrush;
 import frc.robot.util.BeakXboxController;
 
@@ -55,16 +55,18 @@ public class OI {
   public OI() 
   {
     _driverGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_DRIVER_GAMEPAD_USB_PORT);
-    _driverGamepad.leftStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+   /* _driverGamepad.leftStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
     _driverGamepad.rightStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
     _driverGamepad.leftStick.whenReleased(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
     _driverGamepad.rightStick.whenReleased(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
     _driverGamepad.a.whenPressed(new Elevator_ToggleServo());
-    _driverGamepad.b.whenPressed(new Chassis_GearShift());
-    _driverGamepad.lt.whileActive(new Infeed_InfeedBall(rightTrigger))
+    _driverGamepad.b.whenPressed(new Chassis_GearShift());*/
+    _driverGamepad.leftStick.whileActive(new Infeed_DriveInfeedWheelsWithControllers(_driverGamepad.leftStick));
+    _driverGamepad.leftStick.whenReleased(new Infeed_DriveInfeedWheelsWithControllers(_driverGamepad.leftStick));
+  
 
     _operatorGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_OPERATOR_GAMEPAD_USB_PORT);
-    _operatorGamepad.lt.whileActive(new Infeed_SpinArmBrush(_operatorGamepad.lt));
+   // _operatorGamepad.lt.whileActive(new Infeed_SpinArmBrush(_operatorGamepad.lt));
   }
 
 /*

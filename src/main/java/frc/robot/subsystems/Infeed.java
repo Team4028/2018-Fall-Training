@@ -3,13 +3,14 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
 public class Infeed extends Subsystem
 {
-    private VictorSPX _leftInfeedMotor;
-    private VictorSPX _rightInfeedMotor;
+    private VictorSP _leftInfeedMotor;
+    private VictorSP _rightInfeedMotor;
     private VictorSPX _armBrushMotor;
     private static Infeed _instance = new Infeed();
     public static Infeed getInstance()
@@ -18,14 +19,14 @@ public class Infeed extends Subsystem
     }
     private Infeed()
     {
-        _leftInfeedMotor = new VictorSPX(RobotMap.INFEED_MOTOR_LEFT_PCM_PORT);
-        _rightInfeedMotor = new VictorSPX(RobotMap.INFEED_MOTOR_RIGHT_PCM_PORT);
-        _armBrushMotor = new VictorSPX(RobotMap.INFEED_ARM_BRUSH_MOTOR_VICTOR_PCM_PORT);
+        _leftInfeedMotor = new VictorSP(RobotMap.INFEED_MOTOR_LEFT_PWM_PORT);
+        _rightInfeedMotor = new VictorSP(RobotMap.INFEED_MOTOR_RIGHT_PWM_PORT);
     }
     public void setInfeedWheelMotorSpeed(double wheelSpeed)
     {
-        _rightInfeedMotor.set(ControlMode.PercentOutput, -wheelSpeed);
-        _leftInfeedMotor.set(ControlMode.PercentOutput, wheelSpeed);
+        _rightInfeedMotor.set(wheelSpeed);
+        _leftInfeedMotor.set(-wheelSpeed);
+
     }
     public void setArmBrushMotorSpeed(double brushSpeed)
     {
