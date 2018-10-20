@@ -55,18 +55,17 @@ public class OI {
   public OI() 
   {
     _driverGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_DRIVER_GAMEPAD_USB_PORT);
-   /* _driverGamepad.leftStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.leftStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
     _driverGamepad.rightStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
     _driverGamepad.leftStick.whenReleased(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
     _driverGamepad.rightStick.whenReleased(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
     _driverGamepad.a.whenPressed(new Elevator_ToggleServo());
-    _driverGamepad.b.whenPressed(new Chassis_GearShift());*/
-    _driverGamepad.leftStick.whileActive(new Infeed_DriveInfeedWheelsWithControllers(_driverGamepad.leftStick));
-    _driverGamepad.leftStick.whenReleased(new Infeed_DriveInfeedWheelsWithControllers(_driverGamepad.leftStick));
+    _driverGamepad.b.whenPressed(new Chassis_GearShift());
   
-
     _operatorGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_OPERATOR_GAMEPAD_USB_PORT);
    // _operatorGamepad.lt.whileActive(new Infeed_SpinArmBrush(_operatorGamepad.lt));
+   _operatorGamepad.leftStick.whileActive(new Infeed_DriveInfeedWheelsWithControllers(_driverGamepad.leftStick));
+   _operatorGamepad.leftStick.whenReleased(new Infeed_DriveInfeedWheelsWithControllers(_driverGamepad.leftStick));
   }
 
 /*

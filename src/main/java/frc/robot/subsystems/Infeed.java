@@ -24,8 +24,8 @@ public class Infeed extends Subsystem
     }
     public void setInfeedWheelMotorSpeed(double wheelSpeed)
     {
-        _rightInfeedMotor.set(wheelSpeed);
-        _leftInfeedMotor.set(-wheelSpeed);
+        _rightInfeedMotor.set(-wheelSpeed);
+        _leftInfeedMotor.set(wheelSpeed);
 
     }
     public void setArmBrushMotorSpeed(double brushSpeed)
