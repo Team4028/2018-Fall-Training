@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Chassis;
 import frc.robot.util.BeakXboxController.Thumbstick;
 
-public class Chassis_DriverWithControllers extends Command 
+public class Chassis_DriveWithControllers extends Command 
 {
   private Thumbstick _leftThumbstick;
   private Thumbstick _rightThumbstick;
   private Chassis _chassis = Chassis.getInstance();
-  public Chassis_DriverWithControllers(Thumbstick leftThumbstick, Thumbstick rightThumbstick) 
+  public Chassis_DriveWithControllers(Thumbstick leftThumbstick, Thumbstick rightThumbstick) 
   {
     requires(_chassis);
     setInterruptible(true);

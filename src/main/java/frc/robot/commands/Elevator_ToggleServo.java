@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.Elevator;
 
 
-public class Elevator_Toggle extends Command 
+public class Elevator_ToggleServo extends Command 
 {
   private Elevator _elevator = Elevator.getInstance();
   public  void Elevator_Toggle() 

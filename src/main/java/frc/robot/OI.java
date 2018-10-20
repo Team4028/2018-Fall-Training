@@ -7,10 +7,9 @@
 
 package frc.robot;
 
-import frc.robot.commands.Chassis_DriverWithControllers;
+import frc.robot.commands.Chassis_DriveWithControllers;
 import frc.robot.util.BeakXboxController;
-import frc.robot.commands.Elevator_Toggle;
-import frc.robot.commands.Infeed_DriveWithControllers;
+import frc.robot.commands.Elevator_ToggleServo;
 
 
 /**
@@ -53,12 +52,12 @@ public class OI
   public OI() 
   {
     _driverGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_DRIVER_GAMEPAD_USB_PORT);
-    _driverGamepad.leftStick.whileActive(new Chassis_DriverWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
-    _driverGamepad.rightStick.whileActive(new Chassis_DriverWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
-    _driverGamepad.leftStick.whenReleased(new Chassis_DriverWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
-    _driverGamepad.rightStick.whenReleased(new Chassis_DriverWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.leftStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.rightStick.whileActive(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.leftStick.whenReleased(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.rightStick.whenReleased(new Chassis_DriveWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
 
-    _driverGamepad.a.whenPressed(new Elevator_Toggle());
+    _driverGamepad.a.whenPressed(new Elevator_ToggleServo());
 
     //_operatorGamepad.leftStick.whileActive(new Infeed_DriveWithControllers(_driverGamepad.leftStick));
     //_operatorGamepad.leftStick.whenReleased(new Infeed_DriveWithControllers(_driverGamepad.leftStick));
