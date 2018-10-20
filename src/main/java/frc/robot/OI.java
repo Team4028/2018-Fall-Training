@@ -7,15 +7,18 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-
+import frc.robot.commands.Chassis_DriverWithControllers;
+import frc.robot.util.BeakXboxController;
+import frc.robot.commands.Elevator_Toggle;
+import frc.robot.commands.Infeed_DriveWithControllers;
 
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+public class OI 
+{
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
@@ -44,24 +47,39 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  Joystick _driverJoystick;
-  Joystick _operatorJoystick;
+  BeakXboxController _driverGamepad;
+  BeakXboxController _operatorGamepad;
 
-  public OI() {
-    _driverJoystick = new Joystick(0);
-    _operatorJoystick = new Joystick(1);
-  }
+  public OI() 
+  {
+    _driverGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_DRIVER_GAMEPAD_USB_PORT);
+    _driverGamepad.leftStick.whileActive(new Chassis_DriverWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.rightStick.whileActive(new Chassis_DriverWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.leftStick.whenReleased(new Chassis_DriverWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
+    _driverGamepad.rightStick.whenReleased(new Chassis_DriverWithControllers(_driverGamepad.leftStick, _driverGamepad.rightStick));
 
-  public double getLeftMotorCommand() {
-    return _driverJoystick.getRawAxis(1);
+    _driverGamepad.a.whenPressed(new Elevator_Toggle());
+
+    //_operatorGamepad.leftStick.whileActive(new Infeed_DriveWithControllers(_driverGamepad.leftStick));
+    //_operatorGamepad.leftStick.whenReleased(new Infeed_DriveWithControllers(_driverGamepad.leftStick));
+    
+    
+    
+    _operatorGamepad = new BeakXboxController(RobotMap.DRIVERS_STATION_OPERATOR_GAMEPAD_USB_PORT);
+  } 
+  
+
+  
+  /*public double getLeftMotorCommand() {
+    return _driverGamepad.getRawAxis(1);
   }
 
   public double getRightMotorCommand() {
-    return _driverJoystick.getRawAxis(5);
+    return _driverGamepad.getRawAxis(5);
   }
 
   public boolean getExtendServoCommand() {
-    return _driverJoystick.getRawButton(1);
+    return _driverGamepad.getRawButton(1);
   }
 
   public boolean getRetractServoCommand() {
@@ -78,6 +96,6 @@ public class OI {
 
   public boolean getServoCommand() {
     return _operatorJoystick.getRawButton(1);
-  }
+  }*/
 }
 

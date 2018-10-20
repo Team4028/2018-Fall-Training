@@ -18,15 +18,21 @@ public class RobotMap
   // =============================
   // Talon Motor Controllers
   // =============================
-  public static final int CHASSIS_LEFT_DRIVE_MASTER_TALON_CAN_BUS_ID = 5;
-  public static final int CHASSIS_LEFT_DRIVE_SLAVE_TALON_CAN_BUS_ID = 9;
-  public static final int CHASSIS_RIGHT_DRIVE_MASTER_TALON_CAN_BUS_ID = 6;
-  public static final int CHASSIS_RIGHT_DRIVE_SLAVE_TALON_CAN_BUS_ID = 10;
+  public static final int CHASSIS_LEFT_DRIVE_MASTER_TALON_CAN_BUS_ID = 11;
+  public static final int CHASSIS_LEFT_DRIVE_SLAVE_TALON_CAN_BUS_ID = 15;
+  public static final int CHASSIS_LEFT_DRIVE_SLAVE_TWO_TALON_CAN_BUS_ID = 14;
+  public static final int CHASSIS_RIGHT_DRIVE_MASTER_TALON_CAN_BUS_ID = 10;
+  public static final int CHASSIS_RIGHT_DRIVE_SLAVE_TALON_CAN_BUS_ID = 13;
+  public static final int CHASSIS_RIGHT_DRIVE_SLAVE_TWO_TALON_CAN_BUS_ID = 12;
 
   // =============================
-  // Servos
+  // PWM
   // =============================
-  public static final int SHOOTER_SLIDER_LINEAR_SERVO_PWM_PORT = 9;
+  public static final int SHOOTER_SLIDER_LINEAR_SERVO_PWM_PORT = 6;
+  public static final int ELEVATOR_ROTARY_SERVO_PWM_PORT = 9;
+  public static final int INFEED_RIGHT_VICTOR_PWM_PORT = 8;
+  public static final int INFEED_LEFT_VICTOR_PWM_PORT = 7;
+ 
 
   // =============================
   // Solenoids
@@ -51,4 +57,5 @@ public class RobotMap
   public static final String VISION_SOCKET_SERVER_IPV4_ADDR = "10.40.28.xxx";
   public static final int VISION_SOCKET_SERVER_PORT = 1234;
 
+ 
 }
