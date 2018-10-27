@@ -22,13 +22,14 @@ public class Chassis extends Subsystem
 
 
     private Chassis()
-    {
+    {   //left motors set
         _leftMotorMaster = new TalonSRX(RobotMap.CHASSIS_LEFT_DRIVE_MASTER_TALON_CAN_BUS_ID);
         _leftMotorSlave = new TalonSRX(RobotMap.CHASSIS_LEFT_DRIVE_SLAVE_TALON_CAN_BUS_ID);
         _leftMotorSlaveTwo = new TalonSRX(RobotMap.CHASSIS_LEFT_DRIVE_SLAVE_TWO_TALON_CAN_BUS_ID);
         _leftMotorSlave.follow(_leftMotorMaster);
         _leftMotorSlaveTwo.follow(_leftMotorMaster);
 
+        //right motors set
         _rightMotorMaster = new TalonSRX(RobotMap.CHASSIS_RIGHT_DRIVE_MASTER_TALON_CAN_BUS_ID);
         _rightMotorSlave = new TalonSRX(RobotMap.CHASSIS_RIGHT_DRIVE_SLAVE_TALON_CAN_BUS_ID);
         _rightMotorSlaveTwo = new TalonSRX(RobotMap.CHASSIS_RIGHT_DRIVE_SLAVE_TWO_TALON_CAN_BUS_ID);
@@ -47,6 +48,7 @@ public class Chassis extends Subsystem
         return _instance;
     }
 
+        //set motor speed and turn speed
     public void setMotorSpeed (double driveSpeed, double turnSpeed)
     {
         double leftSpeed = (.4 * -driveSpeed ) + (.5 * -turnSpeed);

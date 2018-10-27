@@ -9,6 +9,8 @@ public class Elevator_DriveWithControllers extends Command
   private Thumbstick _leftThumbButton;
   private Thumbstick _rightThumbButton;
   private Elevator _elevator = Elevator.getInstance();
+
+  
   public Elevator_DriveWithControllers(Thumbstick leftThumbButton, Thumbstick rightThumbButton) 
   {
     requires(_elevator);

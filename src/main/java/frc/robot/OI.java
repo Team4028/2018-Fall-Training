@@ -10,6 +10,7 @@ package frc.robot;
 import frc.robot.commands.Chassis_DriveWithControllers;
 import frc.robot.util.BeakXboxController;
 import frc.robot.commands.Elevator_ToggleServo;
+import frc.robot.commands.Infeed_DriveWithControllers;
 
 
 /**
@@ -59,8 +60,8 @@ public class OI
 
     _driverGamepad.a.whenPressed(new Elevator_ToggleServo());
 
-    //_operatorGamepad.leftStick.whileActive(new Infeed_DriveWithControllers(_driverGamepad.leftStick));
-    //_operatorGamepad.leftStick.whenReleased(new Infeed_DriveWithControllers(_driverGamepad.leftStick));
+    _operatorGamepad.leftStick.whileActive(new Infeed_DriveWithControllers(_driverGamepad.leftStick));
+    _operatorGamepad.leftStick.whenReleased(new Infeed_DriveWithControllers(_driverGamepad.leftStick));
     
     
     
